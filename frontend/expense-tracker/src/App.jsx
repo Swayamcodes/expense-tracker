@@ -9,8 +9,9 @@ import {
 
 import Login from './pages/Auth/Login';
 import SignUp from './pages/Auth/SignUp';
-import Home from './pages/Home/Home';
-import Income from './pages/Income/Income';
+import Home from './pages/Dashboard/Home';
+import Income from './pages/Dashboard/Income';
+import Expense from './pages/Dashboard/Expense';
 
 
 
@@ -24,10 +25,19 @@ const App = () => {
           <Route path="/signUp" exact element={<SignUp/>} />
           <Route path="/dashboard" exact element={<Home/>} />
           <Route path="/income" exact element={<Income/>} />
+          <Route path="/expense" exact element={<Expense />} />
           </Routes>
       </Router>
     </div>
   )
 }
 
-export default App
+export default App;
+
+const Root = () => {
+  // Check if token exists in local storage
+  const isAuthenticated = !!localStorage.getItem('token');
+
+  // Redirect based on authentication status
+  return isAuthenticated ? (<Navigate to="/dashboard" />) : (<Navigate to="/login" />);
+}
